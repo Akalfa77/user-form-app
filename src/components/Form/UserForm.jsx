@@ -10,6 +10,18 @@ export default function UserForm() {
 
     const [formData, setFormData] = useState(INITIAL_FORM_STATE)
 
+    const handleInputChange = (e) => {
+        const { name, type, value, checked } = e.target
+
+        setFormData(prevData => ({
+            ...prevData, [name]: type === 'checkbox' ? checked : value
+        }))
+    }
+
+    const handleClear = () => {
+        setFormData(INITIAL_FORM_STATE)
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log("form submitted:", formData)
@@ -21,6 +33,7 @@ export default function UserForm() {
                 name="name"
                 type='text'
                 value={formData.name}
+                onChange={handleInputChange}
                 error=""
             />
 
@@ -30,6 +43,7 @@ export default function UserForm() {
                 type='text'
                 value={formData.email}
                 error=""
+                onChange={handleInputChange}
             />
 
             <FormInput
@@ -38,6 +52,7 @@ export default function UserForm() {
                 type='text'
                 value={formData.phone}
                 error=""
+                onChange={handleInputChange}
             />
 
 
@@ -47,6 +62,7 @@ export default function UserForm() {
                 value={formData.car}
                 options={CAR_OPTIONS}
                 error=""
+                onChange={handleInputChange}
             />
 
             <FormInput
@@ -55,6 +71,7 @@ export default function UserForm() {
                 type='text'
                 value={formData.password}
                 error=""
+                onChange={handleInputChange}
             />
 
             <FormInput
@@ -63,14 +80,16 @@ export default function UserForm() {
                 type='text'
                 value={formData.confirmPassword}
                 error=""
+                onChange={handleInputChange}
             />
 
             <FormRadio
                 label="Select your gender"
-                name="Gender"
+                name="gender"
                 selectedValue={formData.gender}
                 options={GENDER_OPTIONS}
                 error=""
+                onChange={handleInputChange}
             />
 
             <FormRange
@@ -80,6 +99,7 @@ export default function UserForm() {
                 min={0}
                 max={10}
                 error=""
+                onChange={handleInputChange}
             />
 
             <FormCheckbox
@@ -87,12 +107,13 @@ export default function UserForm() {
                 name="terms"
                 checked={formData.terms}
                 error=""
+                onChange={handleInputChange}
             />
 
 
             <div className="form-buttons">
                 <button type='submit' className="btn btn-submit">Submit</button>
-                <button type='button' className="btn btn-clear">Clear</button>
+                <button type='button' onClick={handleClear} className="btn btn-clear">Clear</button>
             </div>
         </form>
     )
