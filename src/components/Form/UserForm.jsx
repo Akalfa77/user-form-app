@@ -5,10 +5,13 @@ import FormSelect from './FormSelect'
 import FormRange from './FormRange'
 import { INITIAL_FORM_STATE, CAR_OPTIONS, GENDER_OPTIONS } from '../../utils/constants'
 import FormCheckbox from './FormCheckbox'
+import useFormValidation from '../../hooks/useFormValidation'
 
 export default function UserForm() {
 
     const [formData, setFormData] = useState(INITIAL_FORM_STATE)
+
+    const { errors, isValid } = useFormValidation(formData)
 
     const handleInputChange = (e) => {
         const { name, type, value, checked } = e.target
@@ -34,7 +37,7 @@ export default function UserForm() {
                 type='text'
                 value={formData.name}
                 onChange={handleInputChange}
-                error=""
+                error={errors.name}
             />
 
             <FormInput
@@ -42,7 +45,7 @@ export default function UserForm() {
                 name="email"
                 type='text'
                 value={formData.email}
-                error=""
+                error={errors.email}
                 onChange={handleInputChange}
             />
 
@@ -51,7 +54,7 @@ export default function UserForm() {
                 name="phone"
                 type='text'
                 value={formData.phone}
-                error=""
+                error={errors.phone}
                 onChange={handleInputChange}
             />
 
@@ -61,7 +64,7 @@ export default function UserForm() {
                 name="car"
                 value={formData.car}
                 options={CAR_OPTIONS}
-                error=""
+                error={errors.car}
                 onChange={handleInputChange}
             />
 
@@ -70,7 +73,7 @@ export default function UserForm() {
                 name="password"
                 type='text'
                 value={formData.password}
-                error=""
+                error={errors.password}
                 onChange={handleInputChange}
             />
 
@@ -79,7 +82,7 @@ export default function UserForm() {
                 name="confirmPassword"
                 type='text'
                 value={formData.confirmPassword}
-                error=""
+                error={errors.confirmPassword}
                 onChange={handleInputChange}
             />
 
@@ -88,7 +91,7 @@ export default function UserForm() {
                 name="gender"
                 selectedValue={formData.gender}
                 options={GENDER_OPTIONS}
-                error=""
+                error={errors.gender}
                 onChange={handleInputChange}
             />
 
@@ -98,7 +101,7 @@ export default function UserForm() {
                 value={formData.cgpa}
                 min={0}
                 max={10}
-                error=""
+                error={errors.cgpa}
                 onChange={handleInputChange}
             />
 
@@ -106,13 +109,13 @@ export default function UserForm() {
                 label="Terms & Conditions"
                 name="terms"
                 checked={formData.terms}
-                error=""
+                error={errors.terms}
                 onChange={handleInputChange}
             />
 
 
             <div className="form-buttons">
-                <button type='submit' className="btn btn-submit">Submit</button>
+                <button type='submit' className="btn btn-submit" disabled={!isValid}>Submit</button>
                 <button type='button' onClick={handleClear} className="btn btn-clear">Clear</button>
             </div>
         </form>

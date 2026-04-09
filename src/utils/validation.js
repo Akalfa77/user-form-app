@@ -123,3 +123,7 @@ export const validateTerms = (checked) => {
   }
   return { isValid: "true", error: "" };
 };
+
+export const validateCGPA = (value) => {
+  return { isValid: true, error: "" };
+};
