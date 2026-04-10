@@ -101,100 +101,123 @@ export default function UserForm() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <FormInput
-                label="Name"
-                name="name"
-                type='text'
-                value={formData.name}
-                onChange={handleInputChange}
-                error={errors.name}
-                onBlur={handleBlur}
-            />
+            <div className="form-row">
+                <FormInput
+                    label="Name"
+                    name="name"
+                    type="text"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    error={errors.name}
+                    className="form-input"
+                />
 
-            <FormInput
-                label="Email"
-                name="email"
-                type='text'
-                value={formData.email}
-                error={errors.email}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-            />
+                <FormInput
+                    label="Email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    error={errors.email}
+                    className="form-input"
+                />
+            </div>
 
-            <FormInput
-                label="Phone No."
-                name="phone"
-                type='text'
-                value={formData.phone}
-                error={errors.phone}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-            />
+            <div className="form-row">
+                <FormInput
+                    label="Phone No"
+                    name="phone"
+                    type="text"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    error={errors.phone}
+                    className="form-input"
+                />
 
+                <FormRadio
+                    label="Select Your Gender"
+                    name="gender"
+                    options={GENDER_OPTIONS}
+                    selectedValue={formData.gender}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    error={errors.gender}
+                />
+            </div>
 
-            <FormSelect
-                label="Choose your fav car"
-                name="car"
-                value={formData.car}
-                options={CAR_OPTIONS}
-                error={errors.car}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-            />
+            <div className="form-row">
+                <FormInput
+                    label="Password"
+                    name="password"
+                    type="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    error={errors.password}
+                    className="form-input"
+                />
 
-            <FormInput
-                label="Password"
-                name="password"
-                type='text'
-                value={formData.password}
-                error={errors.password}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-            />
+                <FormInput
+                    label="Confirm Password"
+                    name="confirmPassword"
+                    type="password"
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    error={errors.confirmPassword}
+                    className="form-input"
+                />
+            </div>
 
-            <FormInput
-                label="Confirm Password"
-                name="confirmPassword"
-                type='text'
-                value={formData.confirmPassword}
-                error={errors.confirmPassword}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-            />
+            <div className="form-row">
+                <FormSelect
+                    label="Choose your favorite car"
+                    name="car"
+                    value={formData.car}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    options={CAR_OPTIONS}
+                    error={errors.car}
+                    className="form-select"
 
-            <FormRadio
-                label="Select your gender"
-                name="gender"
-                selectedValue={formData.gender}
-                options={GENDER_OPTIONS}
-                error={errors.gender}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-            />
+                />
 
-            <FormRange
-                label="CGPA"
-                name="cgpa"
-                value={formData.cgpa}
-                min={0}
-                max={10}
-                error={errors.cgpa}
-                onChange={handleInputChange}
-            />
+                <FormRange
+                    label="Your CGPA"
+                    name="cgpa"
+                    value={formData.cgpa}
+                    onChange={handleInputChange}
+                    min={0}
+                    max={10}
+                    error={errors.cgpa}
+                    className="form-range"
+
+                />
+            </div>
 
             <FormCheckbox
-                label="Terms & Conditions"
+                label="I agree to Terms & Conditions"
                 name="terms"
                 checked={formData.terms}
-                error={errors.terms}
                 onChange={handleInputChange}
                 onBlur={handleBlur}
+                error={errors.terms}
             />
 
-
             <div className="form-buttons">
-                <button type='submit' className="btn btn-submit" disabled={!isValid}>Submit</button>
-                <button type='button' onClick={handleClear} className="btn btn-clear">Clear</button>
+                <button
+                    type="submit"
+                    className="btn btn-submit"
+                    disabled={!isValid}
+                >
+                    {editingUser ? 'Update' : 'Submit'}
+                </button>
+                <button type="button" onClick={handleClear} className="btn btn-clear">
+                    Clear
+                </button>
             </div>
         </form>
     )

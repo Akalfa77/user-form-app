@@ -20,6 +20,6 @@ export const CAR_OPTIONS = [
 ];
 
 export const GENDER_OPTIONS = [
-  { value: "male", label: "Female" },
-  { value: "female", label: "Male" },
+  { value: "male", label: "Male" },
+  { value: "female", label: "Female" },
 ];

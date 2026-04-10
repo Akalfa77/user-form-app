@@ -17,7 +17,6 @@ export function UserProvider({ children }) {
 
     const updateUser = (id, updatedData) => {
         setUsers(prevUsers => prevUsers.map((user) => user.id === id ? { ...user, ...updatedData } : user))
-
         setEditingUser(null)
     }
 

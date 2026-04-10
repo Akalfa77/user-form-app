@@ -10,6 +10,7 @@ export default function FormSelect({ label, name, options, value, onChange, onBl
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
+                className='form-select'
             >
                 {options.map((option) => (
                     <option key={option.value} value={option.value}>

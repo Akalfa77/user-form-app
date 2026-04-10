@@ -10,6 +10,7 @@ export default function FormInput({ label, name, type = 'text', value, onBlur, o
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
+                className='form-input'
             />
 
             {error && <span className="error-message">{error}</span>}
