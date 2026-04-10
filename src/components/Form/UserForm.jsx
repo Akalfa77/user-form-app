@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import FormInput from './FormInput'
 import FormRadio from './FormRadio'
 import FormSelect from './FormSelect'
@@ -6,12 +6,36 @@ import FormRange from './FormRange'
 import { INITIAL_FORM_STATE, CAR_OPTIONS, GENDER_OPTIONS } from '../../utils/constants'
 import FormCheckbox from './FormCheckbox'
 import useFormValidation from '../../hooks/useFormValidation'
+import { UserContext } from '../../context/UserContext'
 
 export default function UserForm() {
 
     const [formData, setFormData] = useState(INITIAL_FORM_STATE)
+    const [touchedFields, setTouchedFields] = useState({})
+    const { addUser, updateUser, editingUser, setEditingUser, getExistingEmails } = useContext(UserContext)
 
-    const { errors, isValid } = useFormValidation(formData)
+
+    const { errors, isValid } = useFormValidation(formData, [], touchedFields)
+
+    const existingEmails = getExistingEmails().filter(
+        email => !editingUser || email !== editingUser.email
+    )
+    useEffect(() => {
+        if (editingUser) {
+            setFormData(editingUser)
+            setTouchedFields({
+                name: true,
+                email: true,
+                phone: true,
+                gender: true,
+                password: true,
+                confirmPassword: true,
+                car: true,
+                cgpa: true,
+                terms: true
+            })
+        }
+    }, [editingUser])
 
     const handleInputChange = (e) => {
         const { name, type, value, checked } = e.target
@@ -21,14 +45,60 @@ export default function UserForm() {
         }))
     }
 
+    const handleBlur = (e) => {
+        const { name } = e.target
+
+        setTouchedFields(prev => ({
+            ...prev,
+            [name]: true
+        }))
+    }
+
+    const handleFocus = (e) => {
+        const { name } = e.target
+
+        if (!touchedFields[name]) {
+            setTouchedFields(prev => ({
+                ...prev,
+                [name]: true
+            }))
+        }
+    }
+
     const handleClear = () => {
         setFormData(INITIAL_FORM_STATE)
+        setTouchedFields({})
+        setEditingUser(null)
     }
+
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log("form submitted:", formData)
+        setTouchedFields({
+            name: true,
+            email: true,
+            phone: true,
+            gender: true,
+            password: true,
+            confirmPassword: true,
+            car: true,
+            cgpa: true,
+            terms: true
+        })
+
+        if (isValid) {
+            if (editingUser) {
+                updateUser(editingUser.id, formData)
+            } else {
+                addUser(formData)
+            }
+            handleClear()
+        }
     }
+
+
+
     return (
         <form onSubmit={handleSubmit}>
             <FormInput
@@ -38,6 +108,7 @@ export default function UserForm() {
                 value={formData.name}
                 onChange={handleInputChange}
                 error={errors.name}
+                onBlur={handleBlur}
             />
 
             <FormInput
@@ -47,6 +118,7 @@ export default function UserForm() {
                 value={formData.email}
                 error={errors.email}
                 onChange={handleInputChange}
+                onBlur={handleBlur}
             />
 
             <FormInput
@@ -56,6 +128,7 @@ export default function UserForm() {
                 value={formData.phone}
                 error={errors.phone}
                 onChange={handleInputChange}
+                onBlur={handleBlur}
             />
 
 
@@ -66,6 +139,7 @@ export default function UserForm() {
                 options={CAR_OPTIONS}
                 error={errors.car}
                 onChange={handleInputChange}
+                onBlur={handleBlur}
             />
 
             <FormInput
@@ -75,6 +149,7 @@ export default function UserForm() {
                 value={formData.password}
                 error={errors.password}
                 onChange={handleInputChange}
+                onBlur={handleBlur}
             />
 
             <FormInput
@@ -84,6 +159,7 @@ export default function UserForm() {
                 value={formData.confirmPassword}
                 error={errors.confirmPassword}
                 onChange={handleInputChange}
+                onBlur={handleBlur}
             />
 
             <FormRadio
@@ -93,6 +169,7 @@ export default function UserForm() {
                 options={GENDER_OPTIONS}
                 error={errors.gender}
                 onChange={handleInputChange}
+                onBlur={handleBlur}
             />
 
             <FormRange
@@ -111,6 +188,7 @@ export default function UserForm() {
                 checked={formData.terms}
                 error={errors.terms}
                 onChange={handleInputChange}
+                onBlur={handleBlur}
             />
 
 

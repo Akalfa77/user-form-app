@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function FormCheckbox({ label, name, checked, onChange, error }) {
+export default function FormCheckbox({ label, name, checked, onChange, onBlur, error }) {
     return (
         <div className="form-group">
             <div className="form-checkbox-wrapper">
@@ -9,6 +9,7 @@ export default function FormCheckbox({ label, name, checked, onChange, error }) 
                     name={name}
                     checked={checked}
                     onChange={onChange}
+                    onBlur={onBlur}
                 />
                 <label htmlFor={name}> {label}</label>
             </div>

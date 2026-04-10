@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function FormInput({ label, name, type = 'text', value, onChange, error }) {
+export default function FormInput({ label, name, type = 'text', value, onBlur, onChange, error }) {
     return (
         <div className="form-group">
             <label htmlFor={name}> {label}</label>
@@ -9,6 +9,7 @@ export default function FormInput({ label, name, type = 'text', value, onChange,
                 name={name}
                 value={value}
                 onChange={onChange}
+                onBlur={onBlur}
             />
 
             {error && <span className="error-message">{error}</span>}
