@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function FormRadio({ label, name, options, selectedValue, onChange, onBlur, error }) {
+function FormRadio({ label, name, options, selectedValue, onChange, onBlur, error }) {
     return (
         <div className="form-group">
             <p>{label}</p>
@@ -23,3 +23,5 @@ export default function FormRadio({ label, name, options, selectedValue, onChang
         </div>
     )
 }
+
+export default React.memo(FormRadio)

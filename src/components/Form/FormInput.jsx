@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function FormInput({ label, name, type = 'text', value, onBlur, onChange, error }) {
+function FormInput({ label, name, type = 'text', value, onBlur, onChange, error }) {
     return (
         <div className="form-group">
             <label htmlFor={name}> {label}</label>
@@ -17,3 +17,5 @@ export default function FormInput({ label, name, type = 'text', value, onBlur, o
         </div>
     )
 }
+
+export default React.memo(FormInput)

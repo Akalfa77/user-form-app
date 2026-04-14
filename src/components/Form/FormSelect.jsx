@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function FormSelect({ label, name, options, value, onChange, onBlur, error }) {
+function FormSelect({ label, name, options, value, onChange, onBlur, error }) {
     return (
         <div className="form-group">
             <label htmlFor={name}> {label}</label>
@@ -22,3 +22,5 @@ export default function FormSelect({ label, name, options, value, onChange, onBl
         </div>
     )
 }
+
+export default React.memo(FormSelect)

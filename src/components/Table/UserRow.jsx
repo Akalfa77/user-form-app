@@ -1,7 +1,7 @@
 import React from 'react'
 import ActionButtons from './ActionButtons'
 
-export default function UserRow({ user, onDelete, onEdit }) {
+function UserRow({ user, onDelete, onEdit }) {
     return (
         <tr>
             <td>{user.name}</td>
@@ -20,3 +20,5 @@ export default function UserRow({ user, onDelete, onEdit }) {
         </tr>
     )
 }
+
+export default React.memo(UserRow)

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function FormRange({ label, name, value, onChange, min, max, error }) {
+function FormRange({ label, name, value, onChange, min, max, error }) {
     return (
         <div className="form-group">
             <label htmlFor={name}> {label}</label>
@@ -19,3 +19,5 @@ export default function FormRange({ label, name, value, onChange, min, max, erro
         </div>
     )
 }
+
+export default React.memo(FormRange)

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ActionButtons({ onEdit, onDelete }) {
+function ActionButtons({ onEdit, onDelete }) {
     return (
         <div className='action-button'>
             <button
@@ -18,3 +18,5 @@ export default function ActionButtons({ onEdit, onDelete }) {
         </div>
     )
 }
+
+export default React.memo(ActionButtons)

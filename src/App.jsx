@@ -2,22 +2,21 @@ import React from 'react'
 import './App.css'
 import UserForm from './components/Form/UserForm'
 import UserTable from './components/Table/UserTable'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { UserProvider } from './context/UserContext'
+import FormPage from './pages/FormPage'
+import TablePage from './pages/TablePage'
 function App() {
 
   return (
-    <div className="app-container">
-      <h1>User Form App</h1>
-
-      <div className="form-section">
-        <h2>User Form</h2>
-        <UserForm />
-      </div>
-
-      <div className="table-section">
-        <h2>User Records</h2>
-        <UserTable />
-      </div>
-    </div>
+    <BrowserRouter>
+      <UserProvider>
+        <Routes>
+          <Route path="/" element={<FormPage />} />
+          <Route path="/users" element={<TablePage />} />
+        </Routes>
+      </UserProvider>
+    </BrowserRouter>
   )
 }
 

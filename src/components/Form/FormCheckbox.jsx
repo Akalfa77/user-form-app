@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function FormCheckbox({ label, name, checked, onChange, onBlur, error }) {
+function FormCheckbox({ label, name, checked, onChange, onBlur, error }) {
     return (
         <div className="form-group">
             <div className="form-checkbox-wrapper">
@@ -17,3 +17,5 @@ export default function FormCheckbox({ label, name, checked, onChange, onBlur, e
         </div>
     )
 }
+
+export default React.memo(FormCheckbox)

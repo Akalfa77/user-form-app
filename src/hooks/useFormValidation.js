@@ -48,7 +48,7 @@ function useFormValidation(formData, existingEmails = [], touchedFields = {}) {
     );
   }, [formData, existingEmails]);
 
-  return { errors, isValid };
+  return useMemo(() => ({ errors, isValid }), [errors, isValid]);
 }
 
 export default useFormValidation;

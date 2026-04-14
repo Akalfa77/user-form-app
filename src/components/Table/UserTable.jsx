@@ -1,21 +1,28 @@
-import React, { useContext } from 'react'
+import { useCallback, useContext } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext'
 import UserRow from './UserRow'
 
-export default function UserTable() {
+function UserTable({ users }) {
+    const { deleteUser, setEditingUser } = useContext(UserContext)
+    const navigate = useNavigate()
+    const location = useLocation()
 
-    const { users, deleteUser, setEditingUser } = useContext(UserContext)
+    const isTablePage = location.pathname === '/users'
 
-
-    const handleEdit = (user) => {
+    const handleEdit = useCallback((user) => {
         setEditingUser(user)
-        // Scroll to form (smooth UX)
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
 
-    const handleDelete = (userId) => {
+        if (isTablePage) {
+            navigate('/')
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }, [isTablePage, navigate, setEditingUser])
+
+    const handleDelete = useCallback((userId) => {
         deleteUser(userId)
-    }
+    }, [deleteUser])
 
     return (
         <div>
@@ -52,3 +59,5 @@ export default function UserTable() {
         </div>
     )
 }
+
+export default UserTable

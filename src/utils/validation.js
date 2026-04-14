@@ -8,10 +8,10 @@ export const validateName = (value) => {
     return { isValid: false, error: "Name is Invalid" };
   }
 
-  return { isValid: "true", error: "" };
+  return { isValid: true, error: "" };
 };
 
-export const validateEmail = (value) => {
+export const validateEmail = (value, existingEmails = []) => {
   if (value.trim() === "") {
     return { isValid: false, error: "Email is required" };
   }
@@ -19,6 +19,16 @@ export const validateEmail = (value) => {
   const emailPatten = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   if (!emailPatten.test(value)) {
     return { isValid: false, error: "Email is Invalid" };
+  }
+
+  if (existingEmails && existingEmails.length > 0) {
+    const isDuplicate = existingEmails.some(
+      (email) => email.toLowerCase() === value.toLowerCase(),
+    );
+
+    if (isDuplicate) {
+      return { isValid: false, error: "Email already exists" };
+    }
   }
 
   //   const isDuplicate = existingEmails.some(
@@ -29,7 +39,7 @@ export const validateEmail = (value) => {
   //     return { isValid: false, error: "Email already exists" };
   //   }
 
-  return { isValid: "true", error: "" };
+  return { isValid: true, error: "" };
 };
 
 export const validatePhone = (value) => {
@@ -42,14 +52,14 @@ export const validatePhone = (value) => {
     return { isValid: false, error: "Phone is Invalid" };
   }
 
-  return { isValid: "true", error: "" };
+  return { isValid: true, error: "" };
 };
 
 export const validateGender = (value) => {
   if (!value) {
     return { isValid: false, error: "Select your Gender" };
   }
-  return { isValid: "true", error: "" };
+  return { isValid: true, error: "" };
 };
 
 export const validatePassword = (value) => {
@@ -95,7 +105,7 @@ export const validatePassword = (value) => {
       error: "Password must contain at least one special character",
     };
   }
-  return { isValid: "true", error: "" };
+  return { isValid: true, error: "" };
 };
 
 export const validateConfirmPassword = (password, confirmPassword) => {
@@ -106,7 +116,7 @@ export const validateConfirmPassword = (password, confirmPassword) => {
   if (password !== confirmPassword) {
     return { isValid: false, error: "Password do not match" };
   }
-  return { isValid: "true", error: "" };
+  return { isValid: true, error: "" };
 };
 
 export const validateCar = (value) => {
@@ -114,14 +124,14 @@ export const validateCar = (value) => {
     return { isValid: false, error: "Please select your fav car" };
   }
 
-  return { isValid: "true", error: "" };
+  return { isValid: true, error: "" };
 };
 
 export const validateTerms = (checked) => {
   if (!checked) {
     return { isValid: false, error: "Accept Terms & Conditions" };
   }
-  return { isValid: "true", error: "" };
+  return { isValid: true, error: "" };
 };
 
 export const validateCGPA = (value) => {

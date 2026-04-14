@@ -13,8 +13,6 @@ export default function UserForm() {
     const [formData, setFormData] = useState(INITIAL_FORM_STATE)
     const [touchedFields, setTouchedFields] = useState({})
     const { addUser, updateUser, editingUser, setEditingUser, getExistingEmails } = useContext(UserContext)
-
-
     const { errors, isValid } = useFormValidation(formData, [], touchedFields)
 
     const existingEmails = getExistingEmails().filter(
@@ -71,8 +69,6 @@ export default function UserForm() {
         setEditingUser(null)
     }
 
-
-
     const handleSubmit = (e) => {
         e.preventDefault()
         setTouchedFields({
@@ -96,8 +92,6 @@ export default function UserForm() {
             handleClear()
         }
     }
-
-
 
     return (
         <form onSubmit={handleSubmit}>
@@ -149,30 +143,6 @@ export default function UserForm() {
             </div>
 
             <div className="form-row">
-                <FormInput
-                    label="Password"
-                    name="password"
-                    type="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    error={errors.password}
-                    className="form-input"
-                />
-
-                <FormInput
-                    label="Confirm Password"
-                    name="confirmPassword"
-                    type="password"
-                    value={formData.confirmPassword}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    error={errors.confirmPassword}
-                    className="form-input"
-                />
-            </div>
-
-            <div className="form-row">
                 <FormSelect
                     label="Choose your favorite car"
                     name="car"
@@ -197,6 +167,32 @@ export default function UserForm() {
 
                 />
             </div>
+
+            <div className="form-row">
+                <FormInput
+                    label="Password"
+                    name="password"
+                    type="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    error={errors.password}
+                    className="form-input"
+                />
+
+                <FormInput
+                    label="Confirm Password"
+                    name="confirmPassword"
+                    type="password"
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    error={errors.confirmPassword}
+                    className="form-input"
+                />
+            </div>
+
+
 
             <FormCheckbox
                 label="I agree to Terms & Conditions"
